@@ -9,7 +9,7 @@ import (
 )
 
 func TestGenerateJWT(t *testing.T) {
-	fmt.Println(GenerateJWT(map[string]interface{}{
+	fmt.Println(JwtTool.GenerateJWT(map[string]interface{}{
 		"user_id": int(1),
 		"version": 1,
 		"exp":     time.Now().Add(2 * time.Hour).Unix(),
@@ -17,7 +17,7 @@ func TestGenerateJWT(t *testing.T) {
 }
 
 func TestValidateJWT(t *testing.T) {
-	token, msg := ValidateJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTAyMDQ5OTMsInVzZXJfaWQiOjEsInZlcnNpb24iOjF9.3Cjs0eJTRloYrUboIndMrPsjiF2gw56fug0Bu11nYU8")
+	token, msg := JwtTool.ValidateJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTAyMDQ5OTMsInVzZXJfaWQiOjEsInZlcnNpb24iOjF9.3Cjs0eJTRloYrUboIndMrPsjiF2gw56fug0Bu11nYU8")
 
 	if !token.Valid {
 		fmt.Println("valid fail", msg)
