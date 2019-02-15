@@ -28,16 +28,16 @@ common functional utils for public
 Most tools as global vals can be put into utils.Welcome to pull your request to fullfill the utils.
 
 #### 2.1 redis
-<a href="">util_redis</a>
+<a href="https://github.com/fwhezfwhez/utils/tree/master/util_redis">util_redis</a>
 
 #### 2.2 jwt
-<a href="">util_jwt</a>
+<a href="https://github.com/fwhezfwhez/utils/tree/master/util_jwt">util_jwt</a>
 
 #### 2.3 jsoncrack
-<a href="">util_jsoncrack</a>
+<a href="https://github.com/fwhezfwhez/utils/tree/master/util_jsoncrack">util_jsoncrack</a>
 
 #### 2.4 superchecker
-<a href="">util_superchecker</a>
+<a href="https://github.com/fwhezfwhez/utils/tree/master/util_superchecker">util_superchecker</a>
 
 ## 3. Notes:
 #### 3.1 All plugins should be inited well before the app starts,so we don't add locks to make it concurrently safe.Neither can we change global tools's properties while the app is running.
