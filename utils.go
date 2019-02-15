@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"crypto/md5"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/shopspring/decimal"
@@ -54,15 +55,27 @@ func RetryHandler(n int, f func() (bool, error)) error {
 //		Friends: []User{User{"f1" , 11, 0.,nil},{"f2" , 12, 0.,nil}},
 //		}
 //		SmartPrint(user)
-func SmartPrint(i interface{}) {
+//
+// If you want those zero value not print,use it like
+// `SmartPrint(user, true)`
+func SmartPrint(i interface{}, escapeZero ...bool) {
+	if len(escapeZero) > 1 {
+		panic(errors.New(fmt.Sprintf("'escapeZero' should be length by 1 or 0 but got %d", len(escapeZero))))
+	}
+
 	var kv = make(map[string]interface{})
 	vValue := reflect.ValueOf(i)
 	vType := reflect.TypeOf(i)
 	for i := 0; i < vValue.NumField(); i++ {
-		kv[vType.Field(i).Name] = vValue.Field(i)
+		kv[vType.Field(i).Name] = vValue.Field(i).Interface()
 	}
 	fmt.Println("receive:")
 	for k, v := range kv {
+		if len(escapeZero) == 1 && escapeZero[0] == true {
+			if IfZero(v) {
+				continue
+			}
+		}
 		fmt.Print(k)
 		fmt.Print(":")
 		fmt.Print(v)
@@ -163,7 +176,7 @@ func IfZero(arg interface{}) bool {
 	case time.Time:
 		return v.IsZero()
 	case decimal.Decimal:
-		tmp,_ := v.Float64()
+		tmp, _ := v.Float64()
 		return math.Abs(tmp-0) < 0.0000001
 	default:
 		return false
