@@ -10,7 +10,7 @@ sudo: true
 go_import_path: github.com/fwhezfwhez/utils
 before_install:
   - go get github.com/jinzhu/gorm
-  -	go get github.com/shopspring/decimal
+  - go get github.com/shopspring/decimal
   - go get github.com/fwhezfwhez/superChecker
   - go get github.com/garyburd/redigo/redis
   - go get github.com/dgrijalva/jwt-go
