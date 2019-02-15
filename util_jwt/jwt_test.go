@@ -9,6 +9,7 @@ import (
 )
 
 func TestGenerateJWT(t *testing.T) {
+	JwtTool.SetSecretKey("HELLO")
 	fmt.Println(JwtTool.GenerateJWT(map[string]interface{}{
 		"user_id": int(1),
 		"version": 1,
@@ -17,7 +18,8 @@ func TestGenerateJWT(t *testing.T) {
 }
 
 func TestValidateJWT(t *testing.T) {
-	token, msg := JwtTool.ValidateJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTAyMDQ5OTMsInVzZXJfaWQiOjEsInZlcnNpb24iOjF9.3Cjs0eJTRloYrUboIndMrPsjiF2gw56fug0Bu11nYU8")
+	JwtTool.SetSecretKey("HELLO")
+	token, msg := JwtTool.ValidateJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTAyMTM2OTQsInVzZXJfaWQiOjEsInZlcnNpb24iOjF9.ctG6UFunYCcHrNYM1FNSTGk8I04eF1nk4TgogYH1i_8")
 
 	if !token.Valid {
 		fmt.Println("valid fail", msg)

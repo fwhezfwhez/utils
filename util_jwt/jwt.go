@@ -28,7 +28,7 @@ func (j *Jwt) SetSecretKey(secretKey string) {
 	return
 }
 
-// GenerateJWT 生成JWT
+// GenerateJWT generate a jwt string
 func (j Jwt)GenerateJWT(claims map[string]interface{}) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims(claims))
 	jwtString, err := token.SignedString([]byte(j.SecretKey))
@@ -38,7 +38,7 @@ func (j Jwt)GenerateJWT(claims map[string]interface{}) (string, error) {
 	return jwtString, nil
 }
 
-// ValidateJWT 校验JWT
+// ValidateJWT validates jwt string
 func (j Jwt)ValidateJWT(t string) (*jwt.Token, string) {
 	token, err := jwt.Parse(t, func(token *jwt.Token) (interface{}, error) {
 		return []byte(j.SecretKey), nil
